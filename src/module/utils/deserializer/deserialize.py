@@ -10,7 +10,7 @@ def serialize(obj: object) -> dict:
     def apply_dict_recursive(_obj):
         if isinstance(_obj, dict):
             return {key: apply_dict_recursive(value) for key, value in _obj.items()}
-        elif isinstance(_obj, list):
+        elif isinstance(_obj, list) or isinstance(_obj, tuple):
             return [apply_dict_recursive(item) for item in _obj]
         elif hasattr(_obj, '__dict__'):
             return apply_dict_recursive(_obj.__dict__)

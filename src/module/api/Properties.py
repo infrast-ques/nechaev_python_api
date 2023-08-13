@@ -1,0 +1,1 @@
+PET_STORE_HOST='petstore.swagger.io'
