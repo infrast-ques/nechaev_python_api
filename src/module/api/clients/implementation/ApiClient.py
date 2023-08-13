@@ -35,9 +35,8 @@ class ApiClient:
         cookies = self.__union_cookies(request.cookies)
 
         __url = f'{self.scheme}://{self.host}{request.endpoint}'
-        __params_format = request.params
 
-        self.__request_log(__url, request)
+        Logger.request_log(self.logger, __url, request)
 
         self.response = requests.request(request.method.value,
                                          url=__url,
@@ -46,7 +45,7 @@ class ApiClient:
                                          params=request.params,
                                          json=request.body)
 
-        self.__response_log()
+        Logger.response_log(self.logger, self.response)
 
         self.__verify_response_status_code(request.expected_status_codes)
 
@@ -74,27 +73,3 @@ class ApiClient:
 
     def __verify_response_status_code(self, status_codes: List[IntEnum]):
         assert self.response.status_code in list(map(lambda code: code._value_, status_codes))
-
-    def __request_log(self, url: str, request: TRequest):
-        self.logger.info(f'\n{Fore.RED}Request START: ─────────────────────────────────────── {Style.RESET_ALL}')
-        self.logger.info(f'Sending url: {Style.BRIGHT}{request.method.value} - {url}{Style.RESET_ALL}')
-        if request.headers is not None:
-            self.logger.info(f'Sending headers:\n{Style.BRIGHT}{request.headers}{Style.RESET_ALL}')
-        else:
-            self.logger.info(f'Sending headers:')
-        if request.cookies is not None:
-            self.logger.info(f'Sending cookies:\n{Style.BRIGHT}{request.cookies}{Style.RESET_ALL}')
-        else:
-            self.logger.info(f'Sending cookies:')
-        if request.body is not None:
-            self.logger.info(f'Sending body:\n{Style.BRIGHT}{json.dumps(request.body, indent=4)}{Style.RESET_ALL}')
-        else:
-            self.logger.info(f'Sending body:')
-        self.logger.info(f'{Fore.RED}Request END: ─────────────────────────────────────── {Style.RESET_ALL}')
-
-    def __response_log(self):
-        self.logger.info(f'{Fore.RED}Response START: ─────────────────────────────────────── {Style.RESET_ALL}')
-        self.logger.info(f'Response code {Style.BRIGHT}{self.response.status_code}{Style.RESET_ALL}')
-        self.logger.info(f'Response body:\n{Style.BRIGHT}{json.dumps(json.loads(self.response.text), indent=4)}{Style.RESET_ALL}')
-        self.logger.info(f'{Fore.RED}Response END: ─────────────────────────────────────── {Style.RESET_ALL}')
-        self.logger.info('\n')
