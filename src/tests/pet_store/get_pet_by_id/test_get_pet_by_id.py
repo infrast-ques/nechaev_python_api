@@ -10,4 +10,4 @@ def test_get_pet_by_id():
 
     response_api = api_client_pet_store.send_request(PetStoreRequests.pet_get_by_id(11111))
 
-    assert response_api.response_dict_body == serialize(expected_pet_data)
+    assert response_api.dict_body == serialize(expected_pet_data)
