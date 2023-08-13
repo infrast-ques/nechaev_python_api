@@ -1,4 +1,5 @@
 import logging
+import sys
 
 
 class Logger:
@@ -8,9 +9,9 @@ class Logger:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
 
-        formatter = logging.Formatter('%(message)s')
-        console_handler = logging.StreamHandler()
+        console_handler = logging.StreamHandler(stream=sys.stdout)
         console_handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(message)s')
         console_handler.setFormatter(formatter)
 
         self.logger.addHandler(console_handler)

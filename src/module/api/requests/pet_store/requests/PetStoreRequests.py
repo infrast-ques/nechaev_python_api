@@ -4,7 +4,7 @@ from src.module.api.requests.implementation.HTTPMethod import HTTPMethod
 from src.module.api.requests.implementation.TRequest import TRequest
 from src.module.api.requests.pet_store.models.request.AddPetRequest import AddPetRequest
 from src.module.api.requests.pet_store.models.response.GetPetResponse import GetPetResponse
-from src.module.deserializer.deserialize import serialize
+from src.module.utils.deserializer.deserialize import serialize
 
 
 class PetStoreRequests:

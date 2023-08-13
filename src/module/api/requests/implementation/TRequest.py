@@ -1,3 +1,6 @@
+from http import HTTPStatus
+from typing import List
+
 from src.module.api.requests.implementation.HTTPMethod import HTTPMethod
 
 
@@ -10,7 +13,8 @@ class TRequest:
                  cookies: dict = None,
                  content_type: str = None,
                  params: dict = None,
-                 body: object = None):
+                 body: object = None,
+                 expected_status_codes: List[HTTPStatus] = [HTTPStatus.OK]):
         self.response_type = response_type
         self.method = method
         self.endpoint = endpoint
@@ -19,3 +23,4 @@ class TRequest:
         self.content_type = content_type
         self.params = params
         self.body = body
+        self.expected_status_codes = expected_status_codes

@@ -1,11 +1,13 @@
 import json
+from enum import IntEnum
+from typing import List
 
 import requests
 from colorama import Style
 
 from src.module.api.clients.implementation.Logger import Logger
 from src.module.api.requests.implementation.TRequest import TRequest
-from src.module.deserializer.deserialize import deserialize
+from src.module.utils.deserializer.deserialize import deserialize
 
 
 class ApiClient:
@@ -55,9 +57,14 @@ class ApiClient:
 
         self.__response_log()
 
-        self.response_dict_body = self.response.text
+        self.__verify_status_code(request.expected_status_codes)
+
+        self.response_dict_body = self.response.json()
         self.response_typed_body = deserialize(request.response_type, self.response.json())
         return self
+
+    def __verify_status_code(self, status_codes: List[IntEnum]):
+        assert self.response.status_code in list(map(lambda code: code._value_, status_codes))
 
     def __request_log(self, url: str, request: TRequest):
         self.logger.info(f'\n{Style.BRIGHT}Request START: ─────────────────────────────────────── {Style.RESET_ALL}')
