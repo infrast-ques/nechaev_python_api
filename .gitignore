@@ -1,0 +1,4 @@
+.idea/
+allure/
+.pytest_cache
+src/learning/
