@@ -1,13 +1,10 @@
-import json
 from enum import IntEnum
 from typing import List
 
 import requests
-from colorama import Style, Fore
 
 from src.module.api.clients.implementation.Logger import Logger
 from src.module.api.requests.implementation.TRequest import TRequest
-from src.module.utils.deserializer.deserialize import deserialize
 
 
 class ApiClient:
@@ -50,7 +47,7 @@ class ApiClient:
         self.__verify_response_status_code(request.expected_status_codes)
 
         self.dict_body = self.response.json()
-        self.typed_body = deserialize(request.response_type, self.response.json())
+        self.typed_body = request.response_type(**self.response.json())
         return self
 
     def __union_headers(self, request_headers: dict, request_content_type: str) -> dict:

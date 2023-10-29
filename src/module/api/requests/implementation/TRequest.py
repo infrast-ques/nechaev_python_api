@@ -13,8 +13,8 @@ class TRequest:
                  cookies: dict = None,
                  content_type: str = None,
                  params: dict = None,
-                 body: object = None,
-                 expected_status_codes: List[HTTPStatus] = [HTTPStatus.OK]):
+                 body: dict = None,
+                 expected_status_codes: List[HTTPStatus] = [HTTPStatus.OK, HTTPStatus.CREATED]):
         self.response_type = response_type
         self.method = method
         self.endpoint = endpoint
