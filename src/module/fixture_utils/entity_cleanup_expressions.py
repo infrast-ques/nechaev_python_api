@@ -1,7 +1,8 @@
 from enum import Enum
 from typing import List
 
-from src.module.fixture_utils.thread_safety_entity_storage import delete_user, delete_role
+from src.module.fixture_utils.role_utils import delete_role
+from src.module.fixture_utils.user_utils import delete_user
 
 
 class EntityCleanupFunctions(Enum):
