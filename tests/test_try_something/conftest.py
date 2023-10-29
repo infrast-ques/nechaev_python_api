@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from src.module.fixture_utils.entity_cleanup_expressions import EntityCleanupFunctions
-from src.module.fixture_utils.thread_safety_entity_storage import get_local_thread
+from src.module.fixture_utils.thread_safety_entity_utils import get_local_thread
 
 
 @pytest.fixture(scope='function', autouse=True)

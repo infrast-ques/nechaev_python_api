@@ -1,7 +1,9 @@
 import allure
 import pytest
 
-from src.module.fixture_utils.thread_safety_entity_storage import get_local_thread, create_user, create_role
+from src.module.fixture_utils.role_utils import create_role
+from src.module.fixture_utils.thread_safety_entity_utils import get_local_thread
+from src.module.fixture_utils.user_utils import create_user
 
 
 @pytest.fixture(scope='function')
