@@ -1,16 +1,14 @@
 from typing import List
 
-from marshmallow_dataclass import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class Category:
+class Category(BaseModel):
     name: str
     id: int
 
 
-@dataclass
-class GetPetResponse:
+class GetPetResponse(BaseModel):
     photoUrls: List[str]
     name: str
     id: int

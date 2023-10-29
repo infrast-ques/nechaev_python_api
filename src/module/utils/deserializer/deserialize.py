@@ -1,12 +1,15 @@
 import marshmallow_dataclass
+import typing_extensions
 
 
-def deserialize(class_type: type, dict_data: dict):
+@typing_extensions.deprecated('use pydantic BaseModel(**dict)')
+def __deserialize(class_type: type, dict_data: dict):
     class_instance = marshmallow_dataclass.class_schema(class_type)()
     return class_instance.load(data=dict_data)
 
 
-def serialize(obj: object) -> dict:
+@typing_extensions.deprecated('use pydantic model_dump_json()')
+def __serialize(obj: object) -> dict:
     def apply_dict_recursive(_obj):
         if isinstance(_obj, dict):
             return {key: apply_dict_recursive(value) for key, value in _obj.items()}

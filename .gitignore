@@ -1,4 +1,4 @@
 .idea
 allure
+allure-report
 .pytest_cache
-src/learning
